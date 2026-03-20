@@ -1,0 +1,255 @@
+:root {
+    --primary: #0f3d2e;
+    --secondary: #1f7a5c;
+    --accent: #d4af37;
+    --white: #ffffff;
+}
+
+body {
+    background: linear-gradient(to right, #0f2027, #203a43, #0f3d2e);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    perspective: 2500px;
+}
+
+/* Floating Animation for the whole card */
+@keyframes float {
+    0% {
+        transform: translateY(0px) rotateX(0deg);
+    }
+
+    50% {
+        transform: translateY(-15px) rotateX(2deg);
+    }
+
+    100% {
+        transform: translateY(0px) rotateX(0deg);
+    }
+}
+
+.card {
+    position: relative;
+    width: 90%;
+    max-width: 380px;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float 4s ease-in-out infinite;
+}
+
+.card.open {
+    transform: translateX(50%) rotateX(0deg);
+    animation: none;
+}
+
+.cover {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    transform-origin: left;
+    transform-style: preserve-3d;
+    transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border-radius: 20px;
+}
+
+.card.open .cover {
+    transform: rotateY(-180deg);
+}
+
+.front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    backface-visibility: hidden;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-shadow: 15px 15px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.front h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    margin: 10px 0;
+    color: gold;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+.front .decoration {
+    font-size: 60px;
+}
+
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    /* Add this */
+
+}
+
+/* Polaroid Photo Style */
+.photo-frame {
+    background: white;
+    padding: 15px 15px 40px 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: rotate(-3deg);
+}
+
+
+/* Ensure images scale properly */
+.photo-frame img {
+    width: 100%;
+    height: auto;
+    max-width: 220px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* .photo-frame img {
+    width: 220px;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+} */
+
+/* Inside Content Styles */
+.inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 1;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.05);
+}
+
+.inner h2 {
+    color: var(--primary);
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+.message {
+    font-size: 1rem;
+    color: #444;
+    line-height: 1.6;
+    margin: 20px 0;
+}
+
+.signature {
+    font-family: 'Caveat', cursive;
+    font-size: 1.8rem;
+    color: var(--accent);
+}
+
+.btn-celebrate {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 30px;
+    font-size: 16px;
+}
+
+.btn-celebrate:hover {
+    transform: scale(1.05) translateY(-2px);
+}
+
+/* Adjust text sizes for smaller screens */
+@media (max-width: 768px) {
+    .front h1 {
+        font-size: 2.5rem;
+    }
+
+    .inner h2 {
+        font-size: 2rem;
+    }
+
+    .message {
+        font-size: 0.9rem;
+    }
+
+    .signature {
+        font-size: 1.4rem;
+    }
+
+    .btn-celebrate {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .front h1 {
+        font-size: 1.7rem;
+    }
+
+    .card {
+        width: 70%;
+    }
+
+    .front .decoration {
+        font-size: 40px;
+    }
+
+    .card.open {
+        width: 40%;
+    }
+
+
+    .inner h2 {
+        font-size: 1.4rem;
+    }
+
+    .message {
+        font-size: 0.8rem;
+        line-height: 1.4;
+
+    }
+
+    .signature {
+        font-size: 1rem;
+    }
+
+    .btn-celebrate {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .photo-frame img {
+        max-width: 150px;
+    }
+
+}
